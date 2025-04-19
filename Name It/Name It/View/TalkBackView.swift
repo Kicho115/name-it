@@ -10,7 +10,13 @@ import AVFoundation
 
 struct TalkBackView: View {
     @Binding var isFlashOn: Bool
+    @Binding var isVoiceFeedbackOn: Bool
+    @Binding var isVibrationOn: Bool
     @StateObject private var cameraModel = CameraModel()
+    
+    private var generator: UIImpactFeedbackGenerator? {
+        isVibrationOn ? UIImpactFeedbackGenerator(style: .medium) : nil
+    }
     
     var body: some View {
         ZStack {
@@ -26,15 +32,6 @@ struct TalkBackView: View {
                     .background(Color.white.opacity(0.8))
                     .cornerRadius(12)
                     .foregroundColor(.black)
-
-                Button("¿Qué ves?") {
-                    cameraModel.speakDetectedObject()
-                }
-                .padding()
-                .background(Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(12)
-
             }
             .padding(.bottom, 50)
         }
@@ -43,6 +40,15 @@ struct TalkBackView: View {
         }
         .onDisappear {
             cameraModel.stopSession()
+        }
+        .onTapGesture {
+            if isVoiceFeedbackOn {
+                cameraModel.speakDetectedObject()
+            }
+            if isVibrationOn {
+                generator?.impactOccurred()
+            }
+            
         }
     }
 }

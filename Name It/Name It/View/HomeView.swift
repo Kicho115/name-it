@@ -4,7 +4,6 @@ struct HomeView: View {
     @State private var isVoiceFeedbackOn = true
     @State private var isFlashOn = true
     @State private var isVibrationOn = true
-    @State private var isAutoDetectionOn = true
     
     var body: some View {
 
@@ -27,7 +26,7 @@ struct HomeView: View {
                     Spacer()
                     
                     // CTA Button with NavigationLink
-                    NavigationLink(destination: TalkBackView(isFlashOn: $isFlashOn)) {
+                    NavigationLink(destination: TalkBackView(isFlashOn: $isFlashOn, isVoiceFeedbackOn: $isVoiceFeedbackOn, isVibrationOn: $isVibrationOn)) {
                         VStack {
                             Image(systemName: "eye.fill")
                                 .font(.largeTitle)
@@ -68,12 +67,6 @@ struct HomeView: View {
                             icon: "iphone.gen2.radiowaves.left.and.right",
                             title: "Vibration",
                             isOn: $isVibrationOn
-                        )
-                        
-                        ToggleRow(
-                            icon: "eye",
-                            title: "Auto-Detection",
-                            isOn: $isAutoDetectionOn
                         )
                     }
                     .padding(.horizontal, 24)
