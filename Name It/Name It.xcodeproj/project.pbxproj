@@ -24,7 +24,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		55AB71B92DA732AE002E3C0A /* Name It.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Name It.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55AB71B92DA732AE002E3C0A /* Real Talk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Real Talk.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55AB71CE2DA732B3002E3C0A /* Name ItTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Name ItTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		55AB71D82DA732B3002E3C0A /* Name ItUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Name ItUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,7 +98,7 @@
 		55AB71BA2DA732AE002E3C0A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				55AB71B92DA732AE002E3C0A /* Name It.app */,
+				55AB71B92DA732AE002E3C0A /* Real Talk.app */,
 				55AB71CE2DA732B3002E3C0A /* Name ItTests.xctest */,
 				55AB71D82DA732B3002E3C0A /* Name ItUITests.xctest */,
 			);
@@ -127,7 +127,7 @@
 			packageProductDependencies = (
 			);
 			productName = "Name It";
-			productReference = 55AB71B92DA732AE002E3C0A /* Name It.app */;
+			productReference = 55AB71B92DA732AE002E3C0A /* Real Talk.app */;
 			productType = "com.apple.product-type.application";
 		};
 		55AB71CD2DA732B3002E3C0A /* Name ItTests */ = {
@@ -424,7 +424,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cetys.Name-It";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Real Talk";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -454,7 +454,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.cetys.Name-It";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Real Talk";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
