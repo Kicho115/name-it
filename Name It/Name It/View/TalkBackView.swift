@@ -39,27 +39,10 @@ struct TalkBackView: View {
             .padding(.bottom, 50)
         }
         .onAppear {
-            cameraModel.startSession()
-            toggleFlash(isOn: isFlashOn)
+            cameraModel.startSession(isFlashOn: isFlashOn)
         }
         .onDisappear {
             cameraModel.stopSession()
-            toggleFlash(isOn: false)
-        }
-    }
-
-    private func toggleFlash(isOn: Bool) {
-        guard let device = AVCaptureDevice.default(for: .video), device.hasTorch else {
-            print("Torch is not available")
-            return
-        }
-
-        do {
-            try device.lockForConfiguration()
-            device.torchMode = isOn ? .on : .off
-            device.unlockForConfiguration()
-        } catch {
-            print("Failed to toggle flash: \(error)")
         }
     }
 }

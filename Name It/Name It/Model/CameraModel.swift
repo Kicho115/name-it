@@ -34,7 +34,7 @@ class CameraModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBuf
     }
 
     // Start the camera session and configure the input and output
-    func startSession() {
+    func startSession(isFlashOn: Bool) {
         session.beginConfiguration()
         guard let device = AVCaptureDevice.default(for: .video),
               let input = try? AVCaptureDeviceInput(device: device)
@@ -54,12 +54,30 @@ class CameraModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBuf
         session.commitConfiguration()
         DispatchQueue.global(qos: .userInitiated).async {
             self.session.startRunning()
+            self.toggleFlash(isOn: isFlashOn)
+        }
+    }
+
+    private func toggleFlash(isOn: Bool) {
+        guard let device = AVCaptureDevice.default(for: .video), device.hasTorch else {
+            print("Torch is not available")
+            return
+        }
+
+        do {
+            try device.lockForConfiguration()
+            device.torchMode = isOn ? .on : .off
+            device.unlockForConfiguration()
+        } catch {
+            print("Failed to toggle flash: \(error)")
         }
     }
 
     // Stop the camera session
     func stopSession() {
         session.stopRunning()
+        self.toggleFlash(isOn: false)
+        
     }
 
     // Capture the output from the camera and process it with the Vision framework
@@ -82,7 +100,7 @@ class CameraModel: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBuf
     // Speak the detected object using AVSpeechSynthesizer
     func speakDetectedObject() {
         let utterance = AVSpeechUtterance(string: detectedLabel)
-        utterance.voice = AVSpeechSynthesisVoice(language: "es-MX")
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
         utterance.rate = 0.5
         speechSynthesizer.speak(utterance)
     }
