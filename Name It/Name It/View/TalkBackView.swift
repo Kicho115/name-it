@@ -10,17 +10,42 @@ import AVFoundation
 
 struct TalkBackView: View {
     @Binding var isFlashOn: Bool
+    @StateObject private var cameraModel = CameraModel()
+    
+    var body: some View {
+        ZStack {
+            TalkBackCamera(session: cameraModel.session)
+                .ignoresSafeArea()
 
-    var body: some View {            
-        Text("Welcome to TalkBack!")
-            .font(.largeTitle)
-            .padding()
-            .onAppear {
-                toggleFlash(isOn: isFlashOn)
+            VStack {
+                Spacer()
+
+                Text(cameraModel.detectedLabel)
+                    .font(.title)
+                    .padding()
+                    .background(Color.white.opacity(0.8))
+                    .cornerRadius(12)
+                    .foregroundColor(.black)
+
+                Button("¿Qué ves?") {
+                    cameraModel.speakDetectedObject()
+                }
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .cornerRadius(12)
+
             }
-            .onDisappear {
-                toggleFlash(isOn: false) // Apaga el flash al salir
-            }
+            .padding(.bottom, 50)
+        }
+        .onAppear {
+            cameraModel.startSession()
+            toggleFlash(isOn: isFlashOn)
+        }
+        .onDisappear {
+            cameraModel.stopSession()
+            toggleFlash(isOn: false)
+        }
     }
 
     private func toggleFlash(isOn: Bool) {
