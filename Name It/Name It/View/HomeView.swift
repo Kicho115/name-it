@@ -1,9 +1,11 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var isVoiceFeedbackOn = true
-    @State private var isFlashOn = true
-    @State private var isVibrationOn = true
+    @State private var isVoiceFeedbackOn = UserDefaultsManager.shared.isVoiceFeedbackOn()
+    @State private var isFlashOn = UserDefaultsManager.shared.isFlashOn()
+    @State private var isVibrationOn = UserDefaultsManager.shared.isVibrationOn()
+
+
     
     var body: some View {
 
@@ -50,29 +52,41 @@ struct HomeView: View {
                             .font(.system(size: 20))
                             .foregroundColor(.white)
                             .padding(.top, 32)
-                        
-                        ToggleRow(
-                            icon: "voiceover",
-                            title: "Voice Feedback",
-                            isOn: $isVoiceFeedbackOn
+
+                    // Toggle para Voice Feedback
+                    ToggleRow(
+                        icon: "voiceover",
+                        title: "Voice Feedback",
+                        isOn: Binding(
+                            get: { UserDefaultsManager.shared.isVoiceFeedbackOn() },
+                            set: { UserDefaultsManager.shared.setVoiceFeedbackOn($0) }
                         )
-                        
-                        ToggleRow(
-                            icon: "flashlight.off.fill",
-                            title: "Flash",
-                            isOn: $isFlashOn
+                    )
+
+                    // Toggle para Flash
+                    ToggleRow(
+                        icon: "flashlight.off.fill",
+                        title: "Flash",
+                        isOn: Binding(
+                            get: { UserDefaultsManager.shared.isFlashOn() },
+                            set: { UserDefaultsManager.shared.setFlashOn($0) }
                         )
-                        
-                        ToggleRow(
-                            icon: "iphone.gen2.radiowaves.left.and.right",
-                            title: "Vibration",
-                            isOn: $isVibrationOn
+                    )
+
+                    // Toggle para Vibration
+                    ToggleRow(
+                        icon: "iphone.gen2.radiowaves.left.and.right",
+                        title: "Vibration",
+                        isOn: Binding(
+                            get: { UserDefaultsManager.shared.isVibrationOn() },
+                            set: { UserDefaultsManager.shared.setVibrationOn($0) }
                         )
-                    }
+                    )
                     .padding(.horizontal, 24)
                     Spacer()
                 }
                 .background(Color(hex: "#323232"))
+
             }
         }
     }
