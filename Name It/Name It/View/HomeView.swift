@@ -1,9 +1,9 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var isVoiceFeedbackOn = true
-    @State private var isFlashOn = true
-    @State private var isVibrationOn = true
+    @AppStorage("isVoiceFeedbackOn") private var isVoiceFeedbackOn = true
+    @AppStorage("isFlashOn") private var isFlashOn = true
+    @AppStorage("isVibrationOn") private var isVibrationOn = true
     
     var body: some View {
 
